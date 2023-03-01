@@ -1,0 +1,38 @@
+﻿@using NutcacheChallenge.ApplicationService.Employees.Messages;
+@model IEnumerable<EmployeeResponse>;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p><a asp-area="" asp-controller="Employee" asp-action="Create">Add new employee</a></p>
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">Team</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.StartDate.ToString("MM/yyyy")</td>
+                    <td>@(item.Team != null ? (TeamEnum)item.Team : " - ")</td>
+                    <td>@Html.ActionLink("Edit",$"Edit", null, new {item.Id})</td>
+                    <td>@Html.ActionLink("Delete",$"ConfirmDelete", null, new {item.Id})</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
